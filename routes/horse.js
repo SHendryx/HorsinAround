@@ -50,6 +50,15 @@ router.get('/queue', loggedIn, (req, res) => {
     .catch(console.error)
 })
 
+router.get('/:id/report', loggedIn, (req, res) => {
+  Promise.all([Horse.findOne({ id: req.params.id })])
+    .then(values => {
+      const horse = values
+      res.render('build-report.ejs', { horse: horse })
+    })
+    .catch(console.error)
+})
+
 router.get('/all', loggedIn, (req, res) => {
   Horse.find()
     // sort by id (ascending)
