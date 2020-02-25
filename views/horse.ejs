@@ -2,12 +2,16 @@
 
 <body>
   <%- include('partials/header-nav') %>
-
-  <% const medicalAnalysis = {}%>
-
   <div id="page-container" class="container-fluid">
     <%# Horse Summary %>
     <div class="container form">
+      <div class="dropdown" align="right">
+        <button class="btn dropdown-toggle fa fa-edit" type="button" data-toggle="dropdown"></button>
+        <ul class="dropdown-menu">
+          <li><a href="/horse/<%= horse.id %>/update">Update</a></li>
+          <li><a href="#">Delete (does not work yet)</a></li>
+        </ul>
+      </div>
       <div class="row">
         <div class="col-sm-4">
           <img alt="Horse" class="img-fluid float-left"
@@ -47,14 +51,11 @@
                 <th scope="row">Vet</th>
                 <td><%= horse.vet %></td>
               </tr>
+              <tr>
+                <th scope="row">History</th>
+                <td><%= horse.history %></td>
+              </tr>
             </tbody>
-          </table>
-
-          <table class="table">
-            <thead>
-              <tr></tr>
-            </thead>
-            <tbody></tbody>
           </table>
         </div>
       </div>
@@ -70,40 +71,28 @@
           </a>
         </div>
         <div class="pad">
-          <a type="button" class="btn btn-dark"
+          <a type="button" class="btn"
             href="/horse/<%= horse.id %>/new-medical-analysis">New Medical Analysis</a>
         </div>
       </div>
 
       <div class="collapse" id="medical">
-        <div class="row">
-          <div class="col-sm-4">
-            <h1>Medical Analysis</h1>
+        <% if(medical !== undefined) { %>
+          <div class="row">
+            <div class="col-sm-4">
+              <h1>Medical Analysis</h1>
+            </div>
+            <div class="col-sm-4">
+              <h1>Date: <%= `${medical.date.getMonth() + 1}/${medical.date.getDate()}/${medical.date.getFullYear()}` %></h1>
+            </div>
+            <div class="col-sm-4">
+              <h1>Farrier: <%= medical.farrier %></h1>
+            </div>
           </div>
-          <div class="col-sm-4">
-            <% const date = new Date() %>
-            <h1>Date: <%= `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}` %></h1>
-          </div>
-          <div class="col-sm-4">
-            <h1>Farrier: <%= medicalAnalysis.farrier %></h1>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-sm-12">
-            <h4>Gait Analysis</h4>
-            <p><%= medicalAnalysis.gait %></p>
-
-            <h4>Lameness</h4>
-            <p><%= medicalAnalysis.lameness %></p>
-
-            <h4>Blemishes</h4>
-            <p><%= medicalAnalysis.blemishes %></p>
-
-            <h4>Laminitus</h4>
-            <p><%= medicalAnalysis.laminitus %></p>
-          </div>
-        </div>
+          <%- include('partials/medical-input-fields', {editable: false}) %>
+        <% } else { %>
+          <div align="center"><H2> No medical reports have been created</H2></div>
+        <% } %>
       </div>
     </div>
 
@@ -117,21 +106,17 @@
           </a>
         </div>
         <div class="pad">
-          <a type="button" class="btn btn-dark" href="/horse/<%= horse.id %>/new-shoeing">New
-            Shoeing</a>
+          <a type="button" class="btn btn-dark" href="/horse/<%= horse.id %>/new-shoeing">New Shoeing</a>
         </div>
       </div>
       <div id="shoeing" class="collapse">
+        <% if(shoeing !== undefined) { %>
         <div class="row">
           <div class="col-sm-4">
             <h2>Most Recent Shoeing</h2>
           </div>
           <div class="col-sm-4">
-            <h2 id="shoeingDate">
-              <%= `${shoeingReportDate.getUTCMonth() + 1}/
-                         ${shoeingReportDate.getUTCDate()}/${shoeingReportDate.getUTCFullYear()}`
-                         .replace(/\n( )*/gm, '') %>
-            </h2>
+              <h1>Date: <%= `${shoeing.date.getMonth() + 1}/${shoeing.date.getDate()}/${shoeing.date.getFullYear()}` %></h1>
           </div>
           <div class="col-sm-4">
             <h2>Farrier: Steve</h2>
@@ -162,6 +147,9 @@
             <%- include('partials/shoeing', horse.data) %>
           </div>
         </div>
+        <% } else { %>
+          <div align="center"><H2> No Shoeing reports have been created</H2></div>
+        <% } %>
       </div>
     </div>
   </div>
