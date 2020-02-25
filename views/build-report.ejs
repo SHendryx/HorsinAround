@@ -1,9 +1,90 @@
 <%- include('partials/head', { title: 'Horse Profile', css: 'horse' }) %>
 
-<body>
+<body xmlns="http://www.w3.org/1999/html">
     <%- include('partials/header-nav') %>
     <div id="page-container" class="container-fluid">
-
+        <div>
+            <div>
+                <h1>Report Builder</h1>
+                <h4>Horse: <%= horse.name %></h4>
+                <label for="Start Date">Start Date:</label>
+                <input style="position: relative; left: 5px" type="date" id="start" name="report-start"
+                       value="" min="2017-01-01" max=""><br>
+                <label for="End Date">End Date:</label>
+                <input style="position: relative; left: 11px" type="date" id="start" name="report-start"
+                       value="" min="2017-01-01" max="">
+            </div>
+            <hr>
+            <div style="display: inline-block">
+                <label for="Medical Analysis">
+                    <h3>Medical Report</h3>
+                    Please select the items you would like to include:
+                </label>
+                <div class="column form" id="medical">
+                    <label for="medical">
+                        <%- include('partials/checkbox', {name: "all-medical", displayName: "All Medical"}) %>
+                    </label>
+                    <%- include('partials/checkbox', {name: "gait", displayName: "Gait Analysis"}) %>
+                    <%- include('partials/checkbox', {name: "lameness", displayName: "Lameness"}) %>
+                    <%- include('partials/checkbox', {name: "blemish", displayName: "Blemishes Analysis"}) %>
+                    <%- include('partials/checkbox', {name: "laminitus", displayName: "Laminitus Analysis"}) %>
+                </div>
+            </div>
+            <hr>
+            <div style="display: inline-block">
+                <label for="Shoeing Report">
+                    <h3>Shoeing Report</h3>
+                    Please select the items you would like to include:
+                </label>
+                <div class="column form" id="shoes">
+                    <label for="shoes">
+                        <h4>Shoes</h4>
+                        <%- include('partials/checkbox', {name: "all-shoes", displayName: "All Shoes"}) %>
+                    </label>
+                    <%- include('partials/checkbox', {name: "pads", displayName: "Pads"}) %>
+                    <%- include('partials/checkbox', {name: "straightbarshoe", displayName: "Straight Bar Shoe"}) %>
+                    <%- include('partials/checkbox', {name: "eggbar", displayName: "Egg Bar"}) %>
+                    <%- include('partials/checkbox', {name: "specialbarshoe", displayName: "Specialty Barshoe"}) %>
+                    <%- include('partials/checkbox', {name: "rolledtoe", displayName: "Rolled Toe"}) %>
+                    <%- include('partials/checkbox', {name: "onionheel", displayName: "Onion Heel"}) %>
+                    <%- include('partials/checkbox', {name: "wideweb", displayName: "Wide Web"}) %>
+                    <%- include('partials/checkbox', {name: "narrowweb", displayName: "Narrow Web"}) %>
+                </div>
+                <div class="column form" id="materials">
+                    <label for="materials">
+                        <h4>Materials</h4>
+                        <%- include('partials/checkbox', {name: "all-materials", displayName: "All Materials"}) %>
+                    </label>
+                    <%- include('partials/checkbox', {name: "limbbrace", displayName: "Limb Brace"}) %>
+                    <%- include('partials/checkbox', {name: "aluminium", displayName: "Aluminium"}) %>
+                    <%- include('partials/checkbox', {name: "titanium", displayName: "Titanium"}) %>
+                    <%- include('partials/checkbox', {name: "poly", displayName: "Poly"}) %>
+                    <%- include('partials/checkbox', {name: "impressionmaterials", displayName: "Impression Materials"}) %>
+                    <%- include('partials/checkbox', {name: "glueonshoes", displayName: "Glue-on Shoe"}) %>
+                    <%- include('partials/checkbox', {name: "equilibrium", displayName: "Equilibrium"}) %>
+                    <%- include('partials/checkbox', {name: "pourin", displayName: "Pour In"}) %>
+                    <%- include('partials/checkbox', {name: "glue", displayName: "Glue"}) %>
+                </div>
+                <div class="column form" id="services">
+                    <label for="services">
+                        <h3>Services</h3>
+                        <%- include('partials/checkbox', {name: "all-services", displayName: "All Services"}) %>
+                    </label>
+                    <%- include('partials/checkbox', {name: "drilltap", displayName: "Drill & Tap"}) %>
+                    <%- include('partials/checkbox', {name: "gluerepair", displayName: "Glue Repair"}) %>
+                    <%- include('partials/checkbox', {name: "quartercrackrepair", displayName: "Quarter Crack Repair"}) %>
+                    <%- include('partials/checkbox', {name: "resection", displayName: "Resection"}) %>
+                    <%- include('partials/checkbox', {name: "rehabilitation", displayName: "Rehabilitation Service"}) %>
+                    <%- include('partials/checkbox', {name: "surgeonconsult", displayName: "Surgeon Consult"}) %>
+                </div>
+                <div class="column form">
+                    <label class="control-label" for="other">
+                        <h4>Other</h4>
+                    </label>
+                    <%- include('partials/checkbox', {name: "other", displayName: "Other Notes"}) %>
+                </div>
+            </div>
+        </div>
     </div>
     <%- include('partials/footer') %>
 </body>
