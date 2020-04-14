@@ -125,29 +125,9 @@
         </div>
 
         <%# Shoeing Data %>
-        <div class="row">
-          <div class="col-sm-6 form">
-            <% horse.data.hoof = "Front Left" %>
-            <%- include('partials/shoeing', horse.data) %>
-          </div>
 
-          <div class="col-sm-6 form">
-            <% horse.data.hoof = "Front Right" %>
-            <%- include('partials/shoeing', horse.data) %>
-          </div>
-        </div>
+          <div align="center"><h4> Horse shoeing data will be displayed here once new partial is ready</h4></div>
 
-        <div class="row">
-          <div class="col-sm-6 form">
-            <% horse.data.hoof = "Back Left" %>
-            <%- include('partials/shoeing', horse.data) %>
-          </div>
-
-          <div class="col-sm-6 form">
-            <% horse.data.hoof = "Back Right" %>
-            <%- include('partials/shoeing', horse.data) %>
-          </div>
-        </div>
         <% } else { %>
           <div align="center"><H2> No Shoeing reports have been created</H2></div>
         <% } %>
