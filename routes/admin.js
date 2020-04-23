@@ -3,9 +3,9 @@
 const express = require('express')
 const router = express.Router()
 const User = require('../models/user')
-const { isAdmin, sendRegistrationEmail } = require('../middleware/auth')
+const { isAdmin, sendRegistrationEmail, loggedIn } = require('../middleware/auth')
 
-router.use(isAdmin)
+router.use(loggedIn, isAdmin)
 router.use('/public', express.static('public'))
 
 router.get('/', async (req, res) => {
@@ -13,14 +13,9 @@ router.get('/', async (req, res) => {
   res.render('admin.ejs', { username: req.user.username, users })
 })
 
-router.post('/register', async (req, res) => {
-  const role = req.body.adminCheck === 'on' ? 'admin' : 'user'
-  if (role === 'admin') {
-    console.log('Registering admin user')
-  }
-  await User.register(new User({ username: req.body.username, role }), req.body.password)
-  console.log('User registered.')
-  res.redirect('/admin')
+router.get('/users', async (req, res) => {
+  const users = await User.find().sort({ lname: 1, username: 1 })
+  res.render('user-management.ejs', { username: req.user.username, users })
 })
 
 router.post('/send-email', sendRegistrationEmail)

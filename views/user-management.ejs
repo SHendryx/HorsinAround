@@ -1,0 +1,31 @@
+<%- include('partials/head', { title: 'Administration' }) %>
+
+<body>
+    <%- include('partials/header-nav', {name: username}) %>
+    <div id="page-container" class="container">
+
+        <table id="queue" class="table table-striped table-dark" width="95%">
+            <thead>
+                <tr role="row">
+                    <th scope="col" id="left-col">Horse</th>
+                    <th scope="col">Location</th>
+                    <th scope="col" id="right-col">Last Visit</th>
+                    <th scope="col" id="assigned">Assigned To Me</th>
+                    <th scope="col" id="button" data-orderable="false"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for (horse of horses) { %>
+                <%-  include('partials/queue-item', { horse, scripts }) %>
+                <% } %>
+            </tbody>
+        </table>
+
+        <div class="row">
+            <% for (user of users) { %>
+            <%-  include('partials/single-user.ejs', { user }) %>
+            <% } %>
+        </div>
+    </div>
+    <%- include('partials/footer') %>
+</body>
