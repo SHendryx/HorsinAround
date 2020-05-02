@@ -14,14 +14,17 @@
  * text.
  * @param {String} fname First name
  * @param {String} lname Last name
- * @param {Number} width The width (in pixels) of the element that will hold the name
+ * @param {Number} width The width of the window
  * @returns {String} The (possibly) shortened name
  */
 function shortenName(fname, lname, width) {
-  // Approximate width of each character in pixels (err on the high side to avoid overlong names).
-  // Adjust this constant to adjust how many characters of the name are shown.
-  const pixelsPerChar = 10
-  const charsAllowed = width / pixelsPerChar
+  // We don't know the exact width of the element, so we approximate how many characters we can fit
+  // loosely based on the width of the window. Change this conversion factor if it's too short or
+  // too long.
+  const conversionFactor = 1 / 77
+  // Set a minumum number of characters to 5 (Two initials, two dots and a space - i.e. "M. D.")
+  const charsAllowed = width * conversionFactor < 5 ? 5 : width * conversionFactor
+
   const fullNameLength = fname.length + lname.length + 1
   if (charsAllowed >= fullNameLength) {
     return `${fname} ${lname}`
@@ -30,30 +33,36 @@ function shortenName(fname, lname, width) {
   if (charsAllowed >= fname.length + 3) {
     return `${fname} ${lname.charAt(0)}.`
   }
-  return `${fname.slice(0, charsAllowed - 3)} ${lname.charAt(0)}.`
+  return `${fname.slice(0, charsAllowed - 4)}. ${lname.charAt(0)}.`
 }
 
-// Fill in the names of the assigned farriers for each horse
-$('.assigned-ferrier').each(function() {
-  // The HTML id is set to the horse's id, so we can get it with:
-  const id = $(this).attr('id')
-  // Find a horse with a matching id (there should only be one)
+/**
+ * Fill in the names of the assigned farriers for each horse
+ */
+function showAssignedFarriers() {
+  // Get the width (in pixels) of the browser window
+  const width = $(window).width()
 
-  const horse = horses.find(horse => horse.id === Number(id))
-  if (horse.assignedFarrier === undefined) {
-    $(this).text('None')
-  } else {
-    // Get the width of the 'Assigned To' column
-    const width = $(this)
-      .get()[0]
-      .getBoundingClientRect()
-    console.log(width)
-    // Get the assigned farrier
-    const farrier = users.find(user => user.id === horse.assignedFarrier)
-    const { fname, lname } = farrier
-    $(this).text(shortenName(fname, lname, width))
-  }
-})
+  $('.assigned-ferrier').each(function() {
+    // The HTML id is set to the horse's id, so we can get it with:
+    const id = $(this).attr('id')
+    // Find a horse with a matching id (there should only be one)
+    const horse = horses.find(horse => horse.id === Number(id))
+
+    if (horse.assignedFarrier === undefined) {
+      $(this).text('None')
+    } else {
+      // Get the assigned farrier
+      const farrier = users.find(user => user.id === horse.assignedFarrier)
+      const { fname, lname } = farrier
+      $(this).text(shortenName(fname, lname, width))
+    }
+  })
+}
+
+showAssignedFarriers()
+
+$(window).resize(showAssignedFarriers)
 
 $(document).ready(function() {
   var table = $('#queue').DataTable({
