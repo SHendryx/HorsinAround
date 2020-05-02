@@ -45,8 +45,8 @@ router.get('/queue', loggedIn, async (req, res) => {
     User.find({})
   ])
   const prunedUsers = users.map(user => ({
-    fname: user.fname != undefined ? user.fname : '!',
-    lname: user.lname != undefined ? user.lname : '!',
+    fname: user.fname !== undefined && user.fname !== '' ? user.fname : 'NoFirstName',
+    lname: user.lname !== undefined && user.lname !== '' ? user.lname : 'NoLastName',
     id: user.id
   }))
 

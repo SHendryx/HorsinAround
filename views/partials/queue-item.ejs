@@ -35,11 +35,10 @@ const date = lastVisitDate(horse)
     </a>
   </td>
   <td class="queue-cell">
-    <address>
-      <a class="link-unstyled queue-item-link" id='<%=horse.id%>' href="/horse/<%= horse.id %>">
-        <%= assignedFarrier != undefined ? assignedFarrier.fname.charAt(0) + '.' +   assignedFarrier.lname.charAt(0) : "None" %>
-      </a>
-    </address>
+    <a class="link-unstyled queue-item-link assigned-ferrier" id='<%=horse.id%>'
+      href="/horse/<%= horse.id %>">
+      <!-- Will be filled by JS -->
+    </a>
   </td>
   <td class="queue-item-dropdown">
     <div class="dropdown open dropleft">
