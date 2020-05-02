@@ -33,6 +33,7 @@ function shortenName(fname, lname, width) {
   if (charsAllowed >= fname.length + 3) {
     return `${fname} ${lname.charAt(0)}.`
   }
+  // Truncate first name to length charsAllowed - 4 (leaving 4 chars for last initial part)
   return `${fname.slice(0, charsAllowed - 4)}. ${lname.charAt(0)}.`
 }
 
