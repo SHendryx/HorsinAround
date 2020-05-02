@@ -44,7 +44,7 @@ function showAssignedFarriers() {
   // Get the width (in pixels) of the browser window
   const width = $(window).width()
 
-  $('.assigned-ferrier').each(function() {
+  $('.assigned-farrier').each(function() {
     // The HTML id is set to the horse's id, so we can get it with:
     const id = $(this).attr('id')
     // Find a horse with a matching id (there should only be one)
