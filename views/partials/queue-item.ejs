@@ -17,7 +17,7 @@ const date = lastVisitDate(horse)
 
 
 <tr>
-  <td class="queue-cell" style=<%- computeBorderStyle(horse) %></td>
+  <td class="queue-cell" style=<%- computeBorderStyle(horse) %>>
     <a class="link-unstyled queue-item-link" id='<%=horse.id%>' href="/horse/<%= horse.id %>">
       <%= horse.name %>
     </a>

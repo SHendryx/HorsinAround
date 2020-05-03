@@ -37,16 +37,12 @@
 <%- include('partials/footer') %>
 
 <script>
-  const userfname = document.createElement('div');
-  userfname.innerText = `<%=user.fname %>`
-  const userlname = document.createElement('div');
-  userlname.innerText = `<%=user.lname %>`
-  
   // Load objects from tbe backend into frontend javascript
   // To do this, they must be converted to object-literal strings that will be present in the page
   // source.
   const users = <%- JSON.stringify(users) %>
   const horses = <%- JSON.stringify(horses) %>
+  const user = <%- JSON.stringify(user) %>
 </script>
 
 <script src="/public/javascripts/queue.js"></script>
