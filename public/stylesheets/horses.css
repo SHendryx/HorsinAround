@@ -25,7 +25,7 @@
   /* Picture does not touch the sides */
   max-width: 90%;
   /* Picture does not push the horse-info div down */
-  max-height: 80%;
+  max-height: 60%;
 }
 
 .horse-info {
